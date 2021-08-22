@@ -92,6 +92,7 @@ StyleCopReport.xml
 *.pidb
 *.svclog
 *.scc
+report.*.json
 
 # Chutzpah Test files
 _Chutzpah*
@@ -138,7 +139,7 @@ _TeamCity*
 !.axoCover/settings.json
 
 # Visual Studio code coverage results
-*.coverage
+*coverage
 *.coveragexml
 
 # NCrunch

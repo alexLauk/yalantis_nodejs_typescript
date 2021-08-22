@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+  app:
+    build: .
+    restart: always
+    ports:
+        - '3000:3000'
+    links:
+        - ya-postgres 
+
+  ya-postgres:
+    image: postgres
+    ports:
+      - '5433:5432'
+    restart: always
+    environment:
+      - POSTGRES_DB=dev
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=pass_123
+
+  ya-postgres-test:
+    image: postgres
+    ports:
+       - '5433:5432'
+    restart: always
+    environment:
+      - POSTGRES_DB=test
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=pass_123

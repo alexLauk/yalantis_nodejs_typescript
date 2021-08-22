@@ -1,0 +1,5 @@
+# Valid
+/src/typeorm/migrations/*.ts
+/src/typeorm/seeds/*.ts
+.eslintrc.js
+jest.config.js

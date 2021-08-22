@@ -60,14 +60,14 @@ describe('user controller', () => {
 
   describe('getAll', () => {
     it('should return all users', async () => {
-      const res = await request.get('/user')
+      const res = await request.get('api/user')
         .set('Authorization', `Bearer ${token}`);
       expect(res.statusCode).toEqual(200);
       expect(res.body).toEqual(users);
     });
 
     it('should return all users if pass valid skip/take', async () => {
-      const res = await request.get('/user')
+      const res = await request.get('api/user')
         .set('Authorization', `Bearer ${token}`)
         .query({ skip: 0, take: 3 });
 
@@ -76,7 +76,7 @@ describe('user controller', () => {
     });
 
     it('should return 1 user if pass take = 1', async () => {
-      const res = await request.get('/user')
+      const res = await request.get('api/user')
         .set('Authorization', `Bearer ${token}`)
         .query({ take: 1 });
 
@@ -85,7 +85,7 @@ describe('user controller', () => {
     });
 
     it('should return 2 users if pass skip = 1', async () => {
-      const res = await request.get('/user')
+      const res = await request.get('api/user')
         .set('Authorization', `Bearer ${token}`)
         .query({ skip: 1 });
 
@@ -94,7 +94,7 @@ describe('user controller', () => {
     });
 
     it('should return Validation error if pass invalid skip', async () => {
-      const res = await request.get('/user')
+      const res = await request.get('api/user')
         .set('Authorization', `Bearer ${token}`)
         .query({ skip: -1 });
 
@@ -103,7 +103,7 @@ describe('user controller', () => {
     });
 
     it('should return Validation error if pass invalid take', async () => {
-      const res = await request.get('/user')
+      const res = await request.get('api/user')
         .set('Authorization', `Bearer ${token}`)
         .query({ take: 0 });
 
@@ -114,7 +114,7 @@ describe('user controller', () => {
 
   describe('getbyID', () => {
     it('should return user by ID', async () => {
-      const res = await request.get('/user/1')
+      const res = await request.get('api/user/1')
         .set('Authorization', `Bearer ${token}`);
 
       expect(res.statusCode).toEqual(200);
@@ -122,7 +122,7 @@ describe('user controller', () => {
     });
 
     it('should return error \'User was not found\' ', async () => {
-      const res = await request.get('/user/10')
+      const res = await request.get('api/user/10')
         .set('Authorization', `Bearer ${token}`);
 
       expect(res.statusCode).toEqual(400);
@@ -132,7 +132,7 @@ describe('user controller', () => {
 
   describe('update', () => {
     it('should return updated user', async () => {
-      const res = await request.put('/user')
+      const res = await request.put('api/user')
         .set('Authorization', `Bearer ${token}`)
         .send({
           firstName: 'Firstname',
@@ -149,7 +149,7 @@ describe('user controller', () => {
     });
 
     it('should return Validation error', async () => {
-      const res = await request.put('/user')
+      const res = await request.put('api/user')
         .set('Authorization', `Bearer ${token}`)
         .send({ firstName: 'Firstname' });
 
@@ -160,7 +160,7 @@ describe('user controller', () => {
 
   describe('deleteByID', () => {
     it('should return deleted user', async () => {
-      const res = await request.delete('/user/2')
+      const res = await request.delete('api/user/2')
         .set('Authorization', `Bearer ${token}`);
 
       expect(res.statusCode).toEqual(200);
@@ -168,7 +168,7 @@ describe('user controller', () => {
     });
 
     it('should return error \'User was not found\'', async () => {
-      const res = await request.delete('/user/2')
+      const res = await request.delete('api/user/2')
         .set('Authorization', `Bearer ${token}`);
 
       expect(res.statusCode).toEqual(400);

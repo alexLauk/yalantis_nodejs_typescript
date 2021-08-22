@@ -1,12 +1,20 @@
+import {
+  Connection,
+  createConnection,
+  getConnection,
+  getConnectionManager,
+} from 'typeorm';
 import config from '../../src/typeorm/config/ormconfig';
-import { Connection, createConnection, getConnection, getConnectionManager } from 'typeorm';
 
 export default class DatabaseUtils {
   private getConnection;
+
   private createConnection;
+
   private connectionManager;
+
   public user: string;
-  
+
   constructor() {
     if (process.env.NODE_ENV !== 'test') {
       throw new Error('ERROR: Test utils only for tests');
@@ -39,7 +47,7 @@ export default class DatabaseUtils {
 
     await this.getConnection().close();
   }
-  
+
   async createUserSchema() {
     try {
       const repository = this.getConnection().getRepository(this.user);
@@ -56,7 +64,7 @@ export default class DatabaseUtils {
           "updated_at" TIMESTAMP NOT NULL DEFAULT now(), 
           CONSTRAINT "UQ_e12875dfb3b1d92d7d7c5377e22" UNIQUE ("email"), 
           CONSTRAINT "PK_cace4a159ff9f2512dd42373760" PRIMARY KEY ("id")
-        )`
+        )`,
       );
     } catch (error) {
       throw new Error(`ERROR: Create user schema: ${error}`);

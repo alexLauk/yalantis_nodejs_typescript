@@ -26,7 +26,7 @@ describe('auth controller', () => {
 
   describe('register', () => {
     it('should register a new user', async () => {
-      const res = await request.post('/auth/register')
+      const res = await request.post('api/auth/register')
         .field({
           email: mockUser.email,
           password: mockUser.password,
@@ -47,7 +47,7 @@ describe('auth controller', () => {
     });
 
     it('should return Validation error if missed email', async () => {
-      const res = await request.post('/auth/register')
+      const res = await request.post('api/auth/register')
         .field({
           firstName: mockUser.firstName,
           lastName: mockUser.lastName,
@@ -60,7 +60,7 @@ describe('auth controller', () => {
     });
 
     it('should return error \'Image uploaded is not of type jpg/jpeg or png\'', async () => {
-      const res = await request.post('/auth/register')
+      const res = await request.post('api/auth/register')
         .field({
           email: mockUser.email,
           firstName: mockUser.firstName,
@@ -74,7 +74,7 @@ describe('auth controller', () => {
     });
 
     it(`should return error 'User with email ${mockUser.email} already exists!'`, async () => {
-      const res = await request.post('/auth/register')
+      const res = await request.post('api/auth/register')
         .field({
           email: mockUser.email,
           password: mockUser.password,
@@ -90,14 +90,14 @@ describe('auth controller', () => {
 
   describe('login', () => {
     it('should login user', async () => {
-      const res = await request.post('/auth/login').send(mockUser);
+      const res = await request.post('api/auth/login').send(mockUser);
       resToken = res.body.token;
       expect(res.statusCode).toEqual(200);
       expect(res.body).toHaveProperty('token');
     });
 
     it('should return Validation error if missed email', async () => {
-      const res = await request.post('/auth/login').send({
+      const res = await request.post('api/auth/login').send({
         password: mockUser.password,
       });
 
@@ -106,7 +106,7 @@ describe('auth controller', () => {
     });
 
     it('should return error \'User was not found\'', async () => {
-      const res = await request.post('/auth/login').send({
+      const res = await request.post('api/auth/login').send({
         email: 'test_email@gmail.com',
         password: 'Test_123',
       });
@@ -116,7 +116,7 @@ describe('auth controller', () => {
     });
 
     it('should return error \'Password is\'t corect\'', async () => {
-      const res = await request.post('/auth/login').send({
+      const res = await request.post('api/auth/login').send({
         email: mockUser.email,
         password: 'Test_123',
       });
@@ -128,7 +128,7 @@ describe('auth controller', () => {
 
   describe('change password', () => {
     it('should return Validation error if missed oldPassword', async () => {
-      const res = await request.put('/auth/change-password')
+      const res = await request.put('api/auth/change-password')
         .set('Authorization', `Bearer ${resToken}`)
         .send({ newPassword: 'Test_123' });
 
@@ -137,7 +137,7 @@ describe('auth controller', () => {
     });
 
     it('should return error \'Current password is not correct\'', async () => {
-      const res = await request.put('/auth/change-password')
+      const res = await request.put('api/auth/change-password')
         .set('Authorization', `Bearer ${resToken}`)
         .send({
           oldPassword: 'Jony_123',
@@ -149,7 +149,7 @@ describe('auth controller', () => {
     });
 
     it('should return error \'New password must differ from previous\'', async () => {
-      const res = await request.put('/auth/change-password')
+      const res = await request.put('api/auth/change-password')
         .set('Authorization', `Bearer ${resToken}`)
         .send({
           oldPassword: 'Jon_123',
@@ -161,7 +161,7 @@ describe('auth controller', () => {
     });
 
     it('should change user password', async () => {
-      const res = await request.put('/auth/change-password')
+      const res = await request.put('api/auth/change-password')
         .set('Authorization', `Bearer ${resToken}`)
         .send({
           oldPassword: 'Jon_123',

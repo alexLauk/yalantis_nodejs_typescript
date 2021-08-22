@@ -50,4 +50,4 @@ GET | /api/user | Returns all users
 GET | /api/user/{id} | Returns a user by id 
 PUT | /api/user | Updates user data
 DELETE | /api/user/{id}  | Deletes user data
-GET | api/uploads/:filename | Returns users avatar
+GET | api/uploads/{filename} | Returns users avatar

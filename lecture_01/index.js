@@ -1,7 +1,7 @@
 //=============================================
 // TASK №0 ------------------------------------
 //=============================================
-const add = a => b => b ? add(a + b) : a
+const add = a => b => b ? add(a + b) : a;
 console.log(add(2)(5)(7)(1)(6)(5)(10)());
 //=============================================
 // TASK №1 ------------------------------------
@@ -35,17 +35,13 @@ console.log(copy({f: {d: {f:'m'}}}));
 //=============================================
 const wrapper = (func) => {
   let cache = new Map();
-
   return (...args) => {
     const key = args.join()
-
     if (cache.has(key)) {
-        return cache.get(key);
+      return cache.get(key);
     }
-
     const result = func(...args);
     cache.set(key, result);
-
     return result;
   };
 }

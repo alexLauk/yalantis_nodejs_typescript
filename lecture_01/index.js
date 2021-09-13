@@ -37,13 +37,13 @@ const wrapper = (func) => {
   let cache = new Map();
 
   return (...args) => {
-    let key = args.join()
+    const key = args.join()
 
     if (cache.has(key)) {
         return cache.get(key);
     }
 
-    let result = func(...args);
+    const result = func(...args);
     cache.set(key, result);
 
     return result;

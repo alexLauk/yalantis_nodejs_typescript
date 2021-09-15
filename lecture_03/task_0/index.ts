@@ -1,27 +1,33 @@
 import * as path from 'path';
-import * as fs from 'fs/promises';
+import * as fs from 'fs';
 import fetch from 'node-fetch';
 
-(async function () {
+(async () => {
   try {
     const [filePath] = process.argv.slice(2);
-    console.log(process.argv)
-    const file = path.basename(filePath).replace(/(?<=.)\w+/, ''); //X(?=Y) //(?<=Y)X // /\w+(?=.)/
-    console.log(file);
+    const dirName = `${path.basename(filePath).replace(/.json/, '')}_pages`;
+    const dirPath = path.join(path.resolve(), './task_0', dirName);
+    const txtFile = path.join(dirPath, 'file.txt');
     
-    // const file = path.join(path.resolve(),'./', file));
-    // await fs.mkdir(path.join(path.resolve(), '/test'), {});
-    const data = JSON.parse(await fs.readFile(filePath, 'utf8'));
-    console.log(data[0]);
+    if (!fs.existsSync(dirPath)) {
+      await fs.promises.mkdir(dirPath, {});
+    }
 
-    const res = await fetch(data[0]);
-    const body = await res.text()
-    // console.log(body);
+    await fs.promises.writeFile(txtFile,'');
+
+    const links = JSON.parse(await fs.promises.readFile(filePath, 'utf8')) as [];
     
+    links.forEach( async (link: string) => {
+      const res = await fetch(link);
+      if (res.status !== 200) {
+        throw new Error('Data couldn\'t be retrieved');
+      }
+      const txt = await res.text();
+      await fs.promises.appendFile(txtFile, txt)
+    });
   } catch (error) {
-      console.log(error);
+    console.log(error);
   }
-   
 })();
   
 

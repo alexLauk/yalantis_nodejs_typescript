@@ -7,7 +7,7 @@
     "build": "rimraf build && tsc -p tsconfig.json",
     "start": "node .build/node_v16.js"
   },
-  "type": "commonjs",
+  "type": "module",
   "keywords": [],
   "author": "Arkadii Zelenskyi",
   "license": "ISC",

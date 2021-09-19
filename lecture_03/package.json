@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "node-fetch": "^3.0.0",
+    "systeminformation": "^5.9.2",
     "yargs": "^17.1.1"
   }
 }

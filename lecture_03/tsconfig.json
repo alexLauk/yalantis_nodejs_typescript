@@ -5,8 +5,8 @@
     "sourceMap": true,
     "esModuleInterop": true,
     "moduleResolution": "Node",
+    "allowSyntheticDefaultImports": true,
     "outDir": ".build",
-    "rootDirs": ["demo", "task_0"]
   },
   "exclude": [
     "node_modules"

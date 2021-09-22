@@ -1,0 +1,23 @@
+{
+  "name": "lecture_04",
+  "version": "1.0.0",
+  "description": "solid",
+  "main": "index.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "build": "rimraf build && tsc -p tsconfig.json",
+    "start": "node --enable-source-maps .build/task/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@sendgrid/mail": "^7.4.6"
+  },
+  "devDependencies": {
+    "rimraf": "^3.0.2",
+    "ts-node": "^10.2.1",
+    "typescript": "^4.4.3"
+  }
+}

@@ -1,20 +1,21 @@
 version: '3.8'
 services:
   nest-app:
-    build: .
-    restart: always
+    image: nest-app
+    container_name: nest-app
+    build:
+      dockerfile: Dockerfile
+      context: .
+    depends_on: 
+      - nest_postgres
     ports:
         - '3000:3000'
-    links:
-        - postgres 
 
-  postgres:
-    image: postgres
-    depends_on:
-      - nest-app
+  nest_postgres:
+    image: postgres:latest
+    container_name: nest_postgres
     ports:
       - '5433:5432'
-    restart: always
     environment:
       - POSTGRES_DB=dev
       - POSTGRES_USER=admin

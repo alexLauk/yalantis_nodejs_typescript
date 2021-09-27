@@ -6,9 +6,12 @@ COPY package*.json ./
 
 RUN npm install
 
-COPY . .
+COPY src ./src/
+COPY tsconfig.json ./tsconfig.json
+COPY tsconfig.build.json ./tsconfig.build.json
 
 RUN npm run build
 
 EXPOSE 3000
-CMD [ "node", "dist/main" ]
+
+CMD npm run start

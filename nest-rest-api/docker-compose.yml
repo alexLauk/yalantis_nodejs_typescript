@@ -8,6 +8,7 @@ services:
       context: .
     depends_on: 
       - nest_postgres
+    restart: always
     ports:
         - '3000:3000'
 
@@ -16,6 +17,7 @@ services:
     container_name: nest_postgres
     ports:
       - '5433:5432'
+    restart: always
     environment:
       - POSTGRES_DB=dev
       - POSTGRES_USER=admin
